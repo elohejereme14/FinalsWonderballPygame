@@ -118,11 +118,11 @@ class State_Level(BaseState):
         self.AddDrawDebugCircleCall(player_collider[0] - self.camera.position, player_collider[1], MYCOLOR.GREEN)
 
     def __drawUI(self):
-        self.AddDrawUISprite("Black", Vector2(), 0, Vector2(2.2, 1.9))
+        self.AddDrawUISprite("Black", Vector2(), 0, Vector2(2.7, 1.9))
         self.AddDrawUISprite("Ball", Vector2(10,3), 0, Vector2(0.6, 0.6))
         self.AddDrawUIFont(f'x{self.player.lives}', Vector2(90, 10), MYCOLOR.WHITE, 30)
         self.AddDrawUISprite("Ring", Vector2(10,43), 0, Vector2(0.6, 0.6))
-        self.AddDrawUIFont(f'x{self.player.coins}', Vector2(90, 50), MYCOLOR.WHITE, 30)
+        self.AddDrawUIFont(f'x{self.player.coins} / 20', Vector2(90, 50), MYCOLOR.WHITE, 30)
         self.AddDrawUIFont("Score", Vector2(10, 90), MYCOLOR.WHITE, 30)
         self.AddDrawUIFont(f'{self.player.score}', Vector2(96, 90), MYCOLOR.WHITE, 30)
 
