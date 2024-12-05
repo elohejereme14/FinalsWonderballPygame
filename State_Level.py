@@ -139,15 +139,15 @@ class State_Level(BaseState):
             self.AddDrawUIFont(f'Speed Boost: {int(self.player.boostTimer)}s', Vector2(5, 160), MYCOLOR.YELLOW, 40)
 
         if self.showChoices:
-            self.AddDrawUISprite("Black", Vector2(300, 200), 0, Vector2(4, 2))  # Background for choices
-            self.AddDrawUIFont("Choose an option:", Vector2(320, 210), MYCOLOR.WHITE, 40)
+            self.AddDrawUISprite("Black", Vector2(300, 200), 0, Vector2(5, 2.2))  # Background for choices
+            self.AddDrawUIFont("GAME PAUSED", Vector2(320, 210), MYCOLOR.WHITE, 50)
             
             # Highlight selection
             color_continue = MYCOLOR.GREEN if self.selectedChoice == 0 else MYCOLOR.WHITE
             color_quit = MYCOLOR.RED if self.selectedChoice == 1 else MYCOLOR.WHITE
 
-            self.AddDrawUIFont("[Continue]", Vector2(320, 260), color_continue, 30)
-            self.AddDrawUIFont("[Quit to Main Menu]", Vector2(320, 300), color_quit, 30)
+            self.AddDrawUIFont("Continue Game", Vector2(320, 260), color_continue, 40)
+            self.AddDrawUIFont("Quit to Main Menu", Vector2(320, 300), color_quit, 40)
 
     def __handleCollision(self):
         player_collider = self.player.colliderData()
@@ -272,8 +272,10 @@ class State_Level(BaseState):
                 
                 if self.showChoices:
                     if env.key == pygame.K_DOWN:
+                        self.rm.GetAudioClip("Selecting").Play()
                         self.selectedChoice = (self.selectedChoice + 1) % 2  # Toggle between 0 and 1
                     elif env.key == pygame.K_UP:
+                        self.rm.GetAudioClip("Selecting").Play()
                         self.selectedChoice = (self.selectedChoice - 1) % 2  # Toggle between 1 and 0
                     elif env.key == pygame.K_RETURN:  # Select the current choice
                         if self.selectedChoice == 0:  # Continue
