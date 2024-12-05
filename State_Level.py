@@ -141,8 +141,13 @@ class State_Level(BaseState):
         if self.showChoices:
             self.AddDrawUISprite("Black", Vector2(300, 200), 0, Vector2(4, 2))  # Background for choices
             self.AddDrawUIFont("Choose an option:", Vector2(320, 210), MYCOLOR.WHITE, 40)
-            self.AddDrawUIFont("[1] Continue", Vector2(320, 260), MYCOLOR.GREEN, 30)
-            self.AddDrawUIFont("[2] Quit to Main Menu", Vector2(320, 300), MYCOLOR.RED, 30)
+            
+            # Highlight selection
+            color_continue = MYCOLOR.GREEN if self.selectedChoice == 0 else MYCOLOR.WHITE
+            color_quit = MYCOLOR.RED if self.selectedChoice == 1 else MYCOLOR.WHITE
+
+            self.AddDrawUIFont("[Continue]", Vector2(320, 260), color_continue, 30)
+            self.AddDrawUIFont("[Quit to Main Menu]", Vector2(320, 300), color_quit, 30)
 
     def __handleCollision(self):
         player_collider = self.player.colliderData()
@@ -260,19 +265,23 @@ class State_Level(BaseState):
                     if not self.isPaused:
                         self.isPaused = True
                         self.showChoices = True
+                        self.selectedChoice = 0  # Reset to first option
                     else:
                         self.isPaused = False
                         self.showChoices = False
                 
                 if self.showChoices:
-                    if env.key == pygame.K_1:  # Continue
-                        self.isPaused = False
-                        self.showChoices = False
-                    elif env.key == pygame.K_2:  # Quit to Main Menu
-                        self.__MainMenu()
-                        self.__ResetStats()   
-                        self.isPaused = False
-                        self.showChoices = False
+                    if env.key == pygame.K_DOWN:
+                        self.selectedChoice = (self.selectedChoice + 1) % 2  # Toggle between 0 and 1
+                    elif env.key == pygame.K_UP:
+                        self.selectedChoice = (self.selectedChoice - 1) % 2  # Toggle between 1 and 0
+                    elif env.key == pygame.K_RETURN:  # Select the current choice
+                        if self.selectedChoice == 0:  # Continue
+                            self.isPaused = False
+                            self.showChoices = False
+                        elif self.selectedChoice == 1:  # Quit to Main Menu
+                            self.__MainMenu()
+                            self.__ResetStats()
 
         # Repeated call
         if not self.isPaused:
