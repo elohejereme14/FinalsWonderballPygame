@@ -282,6 +282,8 @@ class State_Level(BaseState):
                         elif self.selectedChoice == 1:  # Quit to Main Menu
                             self.__MainMenu()
                             self.__ResetStats()
+                            self.isPaused = False
+                            self.showChoices = False
 
         # Repeated call
         if not self.isPaused:
