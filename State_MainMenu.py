@@ -96,17 +96,17 @@ class State_MainMenu(BaseState):
             self.AddDrawUIFont("Space Key : Jump", Vector2(32, 160), MYCOLOR.WHITE, 30)
 
             self.AddDrawUIFont("Tips", Vector2(32, 210), MYCOLOR.WHITE, 30)
-            self.AddDrawUIFont("Falling off the edge allows you to jump once in mid air", Vector2(32, 240), MYCOLOR.WHITE, 20)
-            self.AddDrawUIFont("You can collect object that can boost your speed or jump", Vector2(32, 260), MYCOLOR.WHITE, 20)
+            self.AddDrawUIFont("Falling off the edge allows you to jump once in mid air.", Vector2(32, 240), MYCOLOR.WHITE, 20)
+            self.AddDrawUIFont("You can collect object that can boost your speed or jump.", Vector2(32, 260), MYCOLOR.WHITE, 20)
 
             self.AddDrawUIFont("Objectives:", Vector2(32, 300), MYCOLOR.WHITE, 30)
-            self.AddDrawUIFont("Collect atleast 20 rings to unlock the finishline.", Vector2(32, 330), MYCOLOR.WHITE, 20)
+            self.AddDrawUIFont("Collect atleast 20 rings to unlock the finish line.", Vector2(32, 330), MYCOLOR.WHITE, 20)
 
             self.AddDrawUIFont("[Enter] Return to main menu", Vector2(32, 400), MYCOLOR.RED, 30)
         elif self.page == 2:
             self.AddDrawUIFont("Credits", Vector2(32, 64), MYCOLOR.RED, 72)
-            self.AddDrawUIFont("Game made in Python by Elohe Jereme Maullon and Celino Macasunod Jr.", Vector2(32, 130), MYCOLOR.WHITE, 30)
-            self.AddDrawUIFont("[Enter] Return to main menu", Vector2(32, 200), MYCOLOR.RED, 30)
+            self.AddDrawUIFont("Game made in Python by Elohe Jereme M. Maullon and Celino D. Macasunod Jr.", Vector2(32, 130), MYCOLOR.WHITE, 30)
+            self.AddDrawUIFont("[Enter] Return to main menu.", Vector2(32, 200), MYCOLOR.RED, 30)
 
     def Load(self):
         super().Load()
