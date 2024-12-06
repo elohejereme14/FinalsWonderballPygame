@@ -84,7 +84,7 @@ class State_Level(BaseState):
         self.isOnGround = False
 
         self.levelMap = LevelMap(64) # GridSize = 64x64
-        self.numOfLevels = 6
+        self.numOfLevels = 4
         self.currentLevel = 1
 
         self.isPaused = False
@@ -103,7 +103,7 @@ class State_Level(BaseState):
                     if self.camera.isWithinView(position):
                         self.AddDrawSprite(Tiles[value], position - self.camera.position)
         # Draw level ?-?
-        self.AddDrawFont(f'Level {int((self.currentLevel-1)/3) + 1} - { (self.currentLevel-1)%3 + 1 }', 
+        self.AddDrawFont(f'Level {self.currentLevel} / 4', 
                         self.levelMap.GetStartPoint_ScreenPos() - Vector2(0, 64) - self.camera.position, 
                         MYCOLOR.WHITE, 50)
         
