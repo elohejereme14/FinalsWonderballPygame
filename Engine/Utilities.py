@@ -1,7 +1,5 @@
 from Engine.Vector2 import Vector2
 
-# Utilities functions
-# Colors
 class MYCOLOR:
     BLACK  = (0, 0, 0)
     WHITE  = (255, 255, 255)
@@ -11,11 +9,6 @@ class MYCOLOR:
     YELLOW = (255, 255, 0)
     CYAN   = (0, 255, 255)
 
-# Collision
-# +-----> x
-# |
-# v
-# y
 
 class CollisionData:
     def __init__(self):

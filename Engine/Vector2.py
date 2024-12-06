@@ -1,5 +1,3 @@
-# Vector2D class
-# Stores 2 values (Point/Vector/Coordinate)
 import math
 
 class Vector2:
@@ -7,7 +5,6 @@ class Vector2:
         self.x = x
         self.y = y
     
-    # inheritable alternative constructors
     @classmethod
     def fromTuple(cls, tuple):
         return cls(tuple[0],tuple[1])
