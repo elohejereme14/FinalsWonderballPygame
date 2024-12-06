@@ -37,12 +37,12 @@ class Player:
         self.lives = 3
         self.coins = 0
         self.score = 0
-        self.jumpForce = -7.6  # Default jump force
+        self.jumpForce = -7.6  
         self.speed = 3.3
         self.boostedspeed = 7
-        self.boostedJumpForce = -14.0  # Higher jump force during boost
-        self.isBoosted = False  # Is jump boost active
-        self.boostTimer = 0  # Remaining time for the boost
+        self.boostedJumpForce = -14.0  
+        self.isBoosted = False  
+        self.boostTimer = 0  
         self.speeder = False
 
     def UpdateBoost(self, dt):
@@ -50,7 +50,7 @@ class Player:
             self.boostTimer -= dt
             if self.boostTimer <= 0:
                 self.isBoosted = False
-                self.jumpForce = -7.6  # Reset to default jump force
+                self.jumpForce = -7.6  
                 
         if self.speeder:
             self.boostTimer -= dt
@@ -89,7 +89,7 @@ class State_Level(BaseState):
 
         self.isPaused = False
         self.showChoices = False
-        self.selectedChoice = 0  # 0 for none, 1 for choice A, 2 for choice B
+        self.selectedChoice = 0  
             
     def __drawMap(self):
         Tiles = LevelMap.Tiles
@@ -139,10 +139,10 @@ class State_Level(BaseState):
             self.AddDrawUIFont(f'Speed Boost: {int(self.player.boostTimer)}s', Vector2(5, 160), MYCOLOR.YELLOW, 40)
 
         if self.showChoices:
-            self.AddDrawUISprite("Black", Vector2(300, 200), 0, Vector2(5, 2.2))  # Background for choices
+            self.AddDrawUISprite("Black", Vector2(300, 200), 0, Vector2(5, 2.2))  
             self.AddDrawUIFont("GAME PAUSED", Vector2(320, 210), MYCOLOR.WHITE, 50)
             
-            # Highlight selection
+            
             color_continue = MYCOLOR.GREEN if self.selectedChoice == 0 else MYCOLOR.WHITE
             color_quit = MYCOLOR.RED if self.selectedChoice == 1 else MYCOLOR.WHITE
 
@@ -151,11 +151,11 @@ class State_Level(BaseState):
 
     def __handleCollision(self):
         player_collider = self.player.colliderData()
-        # Collision between player and world
+        
         for collider in self.levelMap.colliders:
             collision = Engine.Utilities.CircleAABB(player_collider[0], player_collider[1], collider.position, collider.position + collider.size)
             if collision.hit:
-                # Resolve
+                
                 resolve_dir = (player_collider[0] - collision.contactPoint).Normalized()
                 resolve_dist = self.player.radius - (player_collider[0] - collision.contactPoint).Length()
                 self.player.position += resolve_dir * resolve_dist
@@ -166,7 +166,7 @@ class State_Level(BaseState):
                 if resolve_dir.y >= 0.7:
                     self.player.velocity.y = 0
 
-                # Debug draw contact point
+                
                 if self.showDebug:
                     self.AddDrawDebugPointCall(collision.contactPoint - self.camera.position, MYCOLOR.BLUE)
 
@@ -183,7 +183,7 @@ class State_Level(BaseState):
                         self.levelMap.RemoveRingTrigger(trigger)
                         self.rm.GetAudioClip("PickupCoin").Play()
                         trigger.active = False
-                        # Play a special sound when the player reaches 20 coins
+                    
                         if self.player.coins == 20:
                             self.rm.GetAudioClip("Checkpoint").Play()
                             self.levelMap.ActivateEndpoint(trigger)
@@ -195,14 +195,14 @@ class State_Level(BaseState):
                         self.player.isBoosted = True
                         self.player.jumpForce = self.player.boostedJumpForce
                         self.levelMap.RemoveRingTrigger(trigger)
-                        self.player.boostTimer = 5.0  # Boost lasts for 5 seconds
+                        self.player.boostTimer = 5.0 
                         self.rm.GetAudioClip("Boost").Play()
                         trigger.active = False
                     elif trigger.name == "SpeedBoost":
                         self.player.speeder = True
                         self.player.speed = self.player.boostedspeed
                         self.levelMap.RemoveRingTrigger(trigger)
-                        self.player.boostTimer = 5.0  # Boost lasts for 5 seconds
+                        self.player.boostTimer = 5.0 
                         self.rm.GetAudioClip("Boost").Play()
                         trigger.active = False
                     elif trigger.name == "Spike":
@@ -217,7 +217,7 @@ class State_Level(BaseState):
                         break
                     elif trigger.name == "Endpoint":
                         if self.player.coins < 20:
-                            continue  # Ignore this trigger if coins are less than 20
+                            continue
                     
                         trigger.active = False
                         if self.currentLevel != self.numOfLevels:
@@ -242,7 +242,7 @@ class State_Level(BaseState):
         else:
             self.player.velocity.x = 0.0
 
-        self.player.position += self.player.velocity * 64.0 * dt # assume 64px = 1metre
+        self.player.position += self.player.velocity * 64.0 * dt
 
     def __handleKeyInput(self):
         # Trigger once
@@ -265,7 +265,7 @@ class State_Level(BaseState):
                     if not self.isPaused:
                         self.isPaused = True
                         self.showChoices = True
-                        self.selectedChoice = 0  # Reset to first option
+                        self.selectedChoice = 0 
                     else:
                         self.isPaused = False
                         self.showChoices = False
