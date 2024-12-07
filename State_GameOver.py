@@ -91,11 +91,12 @@ class State_GameOver(BaseState):
                 file.write(str(self.high_score))
 
         # Update fastest time if necessary
-        current_time = self.sm.variables["TimeTaken"]
-        if self.fastest_time is None or current_time < self.fastest_time:
-            self.fastest_time = current_time
-            with open(self.fastest_time_file, "w") as file:
-                file.write(f"{self.fastest_time:.2f}")
+        if self.sm.variables["Lives"] != -1:
+            current_time = self.sm.variables["TimeTaken"]
+            if self.fastest_time is None or current_time < self.fastest_time:
+                self.fastest_time = current_time
+                with open(self.fastest_time_file, "w") as file:
+                    file.write(f"{self.fastest_time:.2f}")
 
     def Unload(self):
         super().Unload()
