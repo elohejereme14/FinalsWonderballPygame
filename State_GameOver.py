@@ -17,7 +17,9 @@ class State_GameOver(BaseState):
         self.backgroundColor = (100, 180, 220)
         self.levelMap = LevelMap(64)  # GridSize = 64x64
         self.high_score_file = "highscore.txt"  # Path to store the high score
+        self.fastest_time_file = "fastest_time.txt"  # Path to store the fastest time
         self.high_score = 0  # Initialize high score
+        self.fastest_time = None  # Initialize fastest time
 
     def __drawMap(self):
         Tiles = LevelMap.Tiles
@@ -49,7 +51,12 @@ class State_GameOver(BaseState):
         self.AddDrawUIFont(f'Time Elapsed : {int(self.sm.variables["TimeTaken"] / 60)}m {int(self.sm.variables["TimeTaken"] % 60)}s', Vector2(32, 210), MYCOLOR.WHITE, 30)
         self.AddDrawUIFont(f'Highest Score : {self.high_score}', Vector2(32, 250), MYCOLOR.WHITE, 30)
 
-        self.AddDrawUIFont("[Enter] Return to main menu", Vector2(32, 290), MYCOLOR.RED, 25)
+        if self.fastest_time is not None:
+            minutes = int(self.fastest_time // 60)
+            seconds = int(self.fastest_time % 60)
+            self.AddDrawUIFont(f'Fastest Time : {minutes}m {seconds}s', Vector2(32, 280), MYCOLOR.WHITE, 30)
+
+        self.AddDrawUIFont("[Enter] Return to main menu", Vector2(32, 310), MYCOLOR.RED, 25)
 
     def Load(self):
         super().Load()
@@ -66,12 +73,29 @@ class State_GameOver(BaseState):
         else:
             self.high_score = 0
 
+        # Load the fastest time from the file
+        if os.path.exists(self.fastest_time_file):
+            with open(self.fastest_time_file, "r") as file:
+                try:
+                    self.fastest_time = float(file.read().strip())
+                except ValueError:
+                    self.fastest_time = None
+        else:
+            self.fastest_time = None
+
         # Update high score if necessary
         current_score = self.sm.variables["totscore"]
         if current_score > self.high_score:
             self.high_score = current_score
             with open(self.high_score_file, "w") as file:
                 file.write(str(self.high_score))
+
+        # Update fastest time if necessary
+        current_time = self.sm.variables["TimeTaken"]
+        if self.fastest_time is None or current_time < self.fastest_time:
+            self.fastest_time = current_time
+            with open(self.fastest_time_file, "w") as file:
+                file.write(f"{self.fastest_time:.2f}")
 
     def Unload(self):
         super().Unload()
@@ -83,4 +107,3 @@ class State_GameOver(BaseState):
         self.__drawUIs()
         super().Update(dt)
         super().Draw()
-
