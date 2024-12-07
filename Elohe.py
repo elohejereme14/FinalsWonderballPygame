@@ -1,2 +1,2 @@
-# Gwapo AKo huhuhu
-# CJ bading
+# Elohe Pogi AKo huhuhu
+# CJ pogi hehez.
