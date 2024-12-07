@@ -29,7 +29,7 @@ class CycleOptions:
         return self.currentVal
     
     def GetColor(self, val):
-        return MYCOLOR.RED if self.currentVal == val else MYCOLOR.WHITE
+        return MYCOLOR.GREEN if self.currentVal == val else MYCOLOR.WHITE
 
     def GetSize(self, val):
         return 70 if self.currentVal == val else 50
