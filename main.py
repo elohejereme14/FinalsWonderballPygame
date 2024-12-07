@@ -43,7 +43,7 @@ def InitializeResources():
     rm.AddAudioClip(Audio("Checkpoint", "Assets\\SFX\\checkpoint.wav"))
     rm.GetAudioClip("Checkpoint").source.set_volume(0.4)
     rm.AddAudioClip(Audio("Hit", "Assets\\SFX\\hitHurt.wav"))
-    rm.GetAudioClip("Hit").source.set_volume(0.4)
+    rm.GetAudioClip("Hit").source.set_volume(0.8)
     rm.AddAudioClip(Audio("Jump", "Assets\\SFX\\jump.wav"))
     rm.GetAudioClip("Jump").source.set_volume(1.2)
     rm.AddAudioClip(Audio("PickupCoin", "Assets\\SFX\\pickupCoin.wav"))
